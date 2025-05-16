@@ -8,4 +8,8 @@ public interface WeatherStationService {
   WeatherStation findById(long id);
 
   WeatherStationDto register(RegisterWeatherStation registerWeatherStation);
+
+  void updateName(long id, String name);
+
+  void delete(long id);
 }

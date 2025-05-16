@@ -9,4 +9,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MeasurementRepository extends JpaRepository<Measurement, UUID> {
   List<Measurement> findAllByWeatherStationAndMeasurementType(WeatherStation weatherStation, MeasurementTypes measurementType);
+
+  List<Measurement> findAllByWeatherStation(WeatherStation weatherStation);
 }
