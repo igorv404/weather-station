@@ -1,0 +1,29 @@
+name: weather-station
+services:
+  db:
+    image: postgres:latest
+    container_name: db
+    restart: on-failure
+    environment:
+      POSTGRES_USER: alien
+      POSTGRES_PASSWORD: rootroot
+      POSTGRES_DB: weather_station_data
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    restart: on-failure
+    environment:
+      RABBITMQ_DEFAULT_USER: alien
+      RABBITMQ_DEFAULT_PASS: rootroot
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+volumes:
+  db_data:
+    name: weather-station-db-data
