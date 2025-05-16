@@ -17,4 +17,12 @@ public class ExceptionHandlerController {
         new ExceptionHandlerResponse(e.getMessage(), HttpStatus.NOT_FOUND.value(), Instant.now()),
         HttpStatus.NOT_FOUND);
   }
+
+  @ExceptionHandler(value = {IllegalArgumentException.class})
+  private ResponseEntity<ExceptionHandlerResponse> handleIllegalArgumentException(
+      IllegalArgumentException e) {
+    return new ResponseEntity<>(
+        new ExceptionHandlerResponse(e.getMessage(), HttpStatus.BAD_REQUEST.value(), Instant.now()),
+        HttpStatus.BAD_REQUEST);
+  }
 }

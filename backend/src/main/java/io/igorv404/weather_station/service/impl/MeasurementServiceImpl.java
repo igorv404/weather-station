@@ -2,6 +2,9 @@ package io.igorv404.weather_station.service.impl;
 
 import io.igorv404.weather_station.config.RabbitMQConfig;
 import io.igorv404.weather_station.dto.request.MeasurementMessage;
+import io.igorv404.weather_station.dto.response.MeasurementDto;
+import io.igorv404.weather_station.dto.response.MeasurementResponse;
+import io.igorv404.weather_station.dto.response.enums.MeasurementResponseTypes;
 import io.igorv404.weather_station.model.Measurement;
 import io.igorv404.weather_station.model.WeatherStation;
 import io.igorv404.weather_station.model.enums.MeasurementTypes;
@@ -10,6 +13,9 @@ import io.igorv404.weather_station.service.MeasurementService;
 import io.igorv404.weather_station.service.WeatherStationService;
 import jakarta.persistence.EntityNotFoundException;
 import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneOffset;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.AmqpRejectAndDontRequeueException;
@@ -56,5 +62,51 @@ public class MeasurementServiceImpl implements MeasurementService {
         .timestamp(timestamp)
         .weatherStation(station)
         .build();
+  }
+
+  @Override
+  public MeasurementResponse getMeasurement(MeasurementResponseTypes type, LocalDate from,
+      LocalDate to, Long weatherStationId) {
+    WeatherStation weatherStation = weatherStationService.findById(weatherStationId);
+
+    Instant now = Instant.now();
+    Instant fromInstant;
+    Instant toInstant;
+
+    switch (type) {
+      case LAST_WEEK -> {
+        fromInstant = now.minus(7, ChronoUnit.DAYS);
+        toInstant = now;
+      }
+      case LAST_MONTH -> {
+        fromInstant = now.minus(30, ChronoUnit.DAYS);
+        toInstant = now;
+      }
+      case CUSTOM -> {
+        if (from == null || to == null) {
+          throw new IllegalArgumentException("For CUSTOM type, 'from' and 'to' must be provided");
+        }
+
+        fromInstant = from.atStartOfDay(ZoneOffset.UTC).toInstant();
+        toInstant = to.plusDays(1).atStartOfDay(ZoneOffset.UTC).toInstant();
+      }
+      default -> throw new IllegalArgumentException("Unknown type: " + type);
+    }
+
+    return new MeasurementResponse(
+        getMeasurementsOfType(weatherStation, MeasurementTypes.TEMPERATURE, fromInstant, toInstant),
+        getMeasurementsOfType(weatherStation, MeasurementTypes.HUMIDITY, fromInstant, toInstant),
+        getMeasurementsOfType(weatherStation, MeasurementTypes.PRESSURE, fromInstant, toInstant),
+        getMeasurementsOfType(weatherStation, MeasurementTypes.CO2, fromInstant, toInstant)
+    );
+  }
+
+  private List<MeasurementDto> getMeasurementsOfType(WeatherStation station, MeasurementTypes type,
+      Instant from, Instant to) {
+    return measurementRepository
+        .findAllByWeatherStationAndMeasurementTypeAndTimestampBetween(station, type, from, to)
+        .stream()
+        .map(m -> new MeasurementDto(m.getValue(), m.getTimestamp()))
+        .toList();
   }
 }
