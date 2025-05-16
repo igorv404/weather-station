@@ -12,6 +12,18 @@ services:
       - "5432:5432"
     volumes:
       - db_data:/var/lib/postgresql/data
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    restart: on-failure
+    environment:
+      RABBITMQ_DEFAULT_USER: alien
+      RABBITMQ_DEFAULT_PASS: rootroot
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
 volumes:
   db_data:
     name: weather-station-db-data

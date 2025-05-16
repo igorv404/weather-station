@@ -8,6 +8,7 @@ import io.igorv404.weather_station.repository.WeatherStationRepository;
 import io.igorv404.weather_station.service.CustomerService;
 import io.igorv404.weather_station.service.WeatherStationService;
 import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,9 +19,16 @@ public class WeatherStationServiceImpl implements WeatherStationService {
   private final CustomerService customerService;
 
   @Override
+  public WeatherStation findById(long id) {
+    return weatherStationRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(
+        String.format("Weather station with id %d not found", id)));
+  }
+
+  @Override
   public WeatherStationDto register(RegisterWeatherStation registerWeatherStation) {
     if (weatherStationRepository.existsById(registerWeatherStation.id())) {
-      throw new EntityExistsException(String.format("There is already a weather station with id %d", registerWeatherStation.id()));
+      throw new EntityExistsException(String.format("There is already a weather station with id %d",
+          registerWeatherStation.id()));
     }
 
     Customer customer = customerService.findByEmail(registerWeatherStation.email());
