@@ -35,6 +35,7 @@ void setupRabbitMQ() {
 
 void publishMeasurement(const SensorsData& data) {
   StaticJsonDocument<192> doc;
+  
   doc["temperature"] = data.temperature;
   doc["humidity"] = data.humidity;
   doc["pressure"] = data.pressure;

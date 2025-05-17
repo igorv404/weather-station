@@ -14,7 +14,9 @@ services:
       - db_data:/var/lib/postgresql/data
 
   rabbitmq:
-    image: rabbitmq:3-management
+    build:
+      context: .
+      dockerfile: Dockerfile.rabbitmq
     container_name: rabbitmq
     restart: on-failure
     environment:
@@ -23,6 +25,7 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
+      - "1883:1883"
 
 volumes:
   db_data:
