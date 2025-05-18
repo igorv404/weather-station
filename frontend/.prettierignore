@@ -1,0 +1,31 @@
+# compiled output
+dist/
+build/
+
+# dependencies
+node_modules/
+
+# IDEs and editors
+.idea/
+.vscode/
+
+# misc
+coverage/
+.angular/
+
+# index
+src/index.html
+
+# assets
+src/assets/
+
+# config files
+package.json
+package-lock.json
+.editorconfig
+.gitignore
+angular.json
+eslint.config.js
+tsconfig.app.json
+tsconfig.json
+tsconfig.spec.json
