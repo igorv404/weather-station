@@ -1,0 +1,27 @@
+form  {
+  background: rgba(255, 255, 255, 0.15);
+  width: 30vw;
+  aspect-ratio: 1.5 / 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1vw;
+  gap: 1.5lvh;
+}
+
+h1 {
+  color: aliceblue;
+}
+
+input, p-password {
+  width: 80%;
+}
+
+p-button {
+  width: 40%;
+}
+
+a {
+  color: aliceblue;
+}
