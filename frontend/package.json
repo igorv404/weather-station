@@ -11,15 +11,15 @@
   },
   "lint-staged": {
     "*.ts": [
-      "eslint --fix",
-      "prettier --write"
+      "cd frontend && eslint --fix",
+      "cd frontend && prettier --write"
     ],
     "*.html": [
-      "eslint --fix",
-      "prettier --write"
+      "cd frontend && eslint --fix",
+      "cd frontend && prettier --write"
     ],
     "*.scss": [
-      "prettier --write"
+      "cd frontend && prettier --write"
     ]
   },
   "private": true,

@@ -1,13 +1,10 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {AuthFormComponent} from '../components/auth-form/auth-form.component';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AuthFormComponent } from '../components/auth-form/auth-form.component';
 
 @Component({
   selector: 'app-registration',
-  imports: [
-    ReactiveFormsModule,
-    AuthFormComponent
-  ],
+  imports: [ReactiveFormsModule, AuthFormComponent],
   templateUrl: './registration.component.html',
   styleUrl: './registration.component.scss'
 })

@@ -1,7 +1,7 @@
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 main {
@@ -9,10 +9,10 @@ main {
 }
 
 .auth-main {
-  height: 100lvh;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100lvh;
 }
 
 a {
