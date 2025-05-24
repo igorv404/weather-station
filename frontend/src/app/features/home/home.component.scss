@@ -1,0 +1,44 @@
+main {
+  min-height: 100lvh;
+  padding: 5lvh 10vw;
+}
+
+.action-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3lvh;
+}
+
+.stations-area {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2vw;
+}
+
+.station {
+  aspect-ratio: 2 / 1;
+  padding: 2lvh 2vw;
+  border-radius: 1vw;
+  background: rgba(255, 255, 255, 0.15);
+
+  display: flex;
+  justify-content: space-between;
+  gap: 1vh;
+
+  a {
+    color: aliceblue;
+    font-size: 1.5vw;
+    font-weight: bolder;
+  }
+
+  p-button {
+    align-self: flex-end;
+  }
+}
+
+.station-action-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

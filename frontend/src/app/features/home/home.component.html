@@ -1,0 +1,17 @@
+<main>
+  <div class="action-section">
+    <h1>Your weather stations</h1>
+    <p-button icon="pi pi-plus" [rounded]="true" severity="secondary"/>
+  </div>
+  <div class="stations-area">
+    @for (station of stations; track $index) {
+      <div class="station">
+        <a [routerLink]="'/'">{{station.name}}</a>
+        <div class="station-action-section">
+          <p-button icon="pi pi-pencil" [rounded]="true" severity="secondary"/>
+          <p-button icon="pi pi-trash" [rounded]="true" severity="secondary"/>
+        </div>
+      </div>
+    }
+  </div>
+</main>
