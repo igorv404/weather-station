@@ -1,0 +1,27 @@
+<main>
+  <div class="action-section">
+    <p-button icon="pi pi-arrow-left" label="Home" (click)="goToHomePage()"></p-button>
+    <div class="date-selector">
+      @if (selectedRange === MeasurementResponseTypes.CUSTOM) {
+        <div class="calendar-range">
+          <p-date-picker [(ngModel)]="startDate" (onSelect)="onDateChange()" [showIcon]="true" placeholder="Start date"></p-date-picker>
+          <p-date-picker [(ngModel)]="endDate" (onSelect)="onDateChange()" [showIcon]="true" placeholder="End date"></p-date-picker>
+        </div>
+      }
+      <p-select
+        [options]="rangeOptions"
+        [(ngModel)]="selectedRange"
+        (onChange)="onRangeChange($event.value)"
+      ></p-select>
+    </div>
+  </div>
+  @if (selectedRange === MeasurementResponseTypes.CUSTOM && startDate && endDate) {
+    <p class="custom-range-text">Data shown from {{ startDate | date:'dd.MM.yyyy' }} to {{ endDate | date:'dd.MM.yyyy' }}</p>
+  }
+  <div class="charts">
+    <p-chart type="line" [data]="temperatureData" [options]="chartOptions"></p-chart>
+    <p-chart type="line" [data]="humidityData" [options]="chartOptions"></p-chart>
+    <p-chart type="line" [data]="pressureData" [options]="chartOptions"></p-chart>
+    <p-chart type="line" [data]="co2Data" [options]="chartOptions"></p-chart>
+  </div>
+</main>

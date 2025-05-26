@@ -88,7 +88,7 @@ public class MeasurementServiceImpl implements MeasurementService {
         }
 
         fromInstant = from.atStartOfDay(ZoneOffset.UTC).toInstant();
-        toInstant = to.plusDays(1).atStartOfDay(ZoneOffset.UTC).toInstant();
+        toInstant = to.plusDays(2).atStartOfDay(ZoneOffset.UTC).toInstant();
       }
       default -> throw new IllegalArgumentException("Unknown type: " + type);
     }

@@ -1,0 +1,11 @@
+<main class="auth-main">
+  <app-auth-form
+    [form]="authForm"
+    formLabel="Log In"
+    submitLabel="Login"
+    redirectHint="Don't have an account?"
+    redirectText="Sign up"
+    redirectUrl="/registration"
+    (submitted)="login()"
+  ></app-auth-form>
+</main>

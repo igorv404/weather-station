@@ -35,7 +35,7 @@ def send_measurement():
 try:
     while True:
         send_measurement()
-        time.sleep(10)
+        time.sleep(1)
 except KeyboardInterrupt:
     print("Stopped")
 finally:

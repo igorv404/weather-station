@@ -1,0 +1,15 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <h1>{{ formLabel }}</h1>
+  <input pInputText formControlName="email" type="email" placeholder="Email" />
+  <p-password formControlName="password" placeholder="Password" feedback="false" fluid="true" />
+  <p-button
+    [label]="submitLabel"
+    type="submit"
+    [disabled]="form.invalid"
+    severity="secondary"
+    fluid="true"
+  />
+  <p>
+    {{ redirectHint }} <a [routerLink]="redirectUrl">{{ redirectText }}</a>
+  </p>
+</form>
