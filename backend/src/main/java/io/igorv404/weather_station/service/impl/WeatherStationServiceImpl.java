@@ -29,6 +29,15 @@ public class WeatherStationServiceImpl implements WeatherStationService {
   }
 
   @Override
+  public List<WeatherStationDto> findAllCustomersWeatherStations(String customerEmail) {
+    Customer customer = customerService.findByEmail(customerEmail);
+
+    return weatherStationRepository.findAllByCustomer(customer).stream()
+        .map(ws -> new WeatherStationDto(ws.getId(), ws.getName()))
+        .toList();
+  }
+
+  @Override
   public WeatherStationDto register(RegisterWeatherStation registerWeatherStation) {
     if (weatherStationRepository.existsById(registerWeatherStation.id())) {
       throw new EntityExistsException(String.format("There is already a weather station with id %d",
