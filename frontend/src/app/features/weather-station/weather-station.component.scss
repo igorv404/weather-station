@@ -1,0 +1,31 @@
+main {
+  min-height: 100lvh;
+  padding: 5lvh 10vw;
+}
+
+.action-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.date-selector {
+  display: flex;
+  align-items: center;
+  gap: 1vw;
+}
+
+.calendar-range {
+  display: flex;
+  gap: 1vw;
+}
+
+.custom-range-text {
+  margin: 3lvh 0;
+}
+
+.charts {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3lvh 3vw;
+}

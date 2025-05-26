@@ -17,7 +17,7 @@ const char* mqtt_topic = MEASUREMENT_QUEUE;
 WiFiClient espClient;
 PubSubClient client(espClient);
 
-constexpr unsigned long interval = 60000;
+constexpr unsigned long interval = 1000;
 unsigned long previousMillis = 0;
 
 void reconnect() {
